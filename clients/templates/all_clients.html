@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load tailwind_tags %}
+{%tailwind_css %}
+      <section class="gray">
+        <div class="container">
+          <div class="row justify-content-center">
+            <!-- Single List -->
+
+            {% for client in all_clients %}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+              <div class="crs_grid">
+                  <div class=" text-center">
+                    <h1>
+                      <a href="{{client.id}}" class=""
+                        >{{client.full_name}}</a>
+                    </h1>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- add client -->
+          <form action="" method="post"  >
+            {% csrf_token %}
+            <br>
+            <div >
+              <div class = "grid grid-cols-4 gap-4">
+                <div class="...">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  full name 
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" type="text" name="name" placeholder="full name"></div>
+                <div class="...">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  classification
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="classification" type="text" name="classification" placeholder="classification"></div>
+                <div class="...">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  email
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" type="text" name="email" placeholder="email"></div>
+                <div class="...">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  phone_number
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" type="text" name="phone_number" placeholder="phone_number"></div>
+              </div>
+            </div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add client </button>
+          </form>
+        </div>
+      </section>
+      {% endblock content %}

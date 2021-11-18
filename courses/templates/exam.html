@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load tailwind_tags %}
+{%tailwind_css %}
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'lecture-css/bootstrap.min.css'%}" rel="stylesheet" />
+    
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/font-awesome.min.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/themify.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Angular Tooltip Css -->
+    <link
+      href="{% static 'lecture-css/angular-tooltips.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+    <link
+      href="file:///C:/Users/joker/Desktop/full-SkillUp-template/_documentation/assets/plugins/datatables/dataTables.bootstrap4.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+    <link href="{% static 'lecture-css/animate.css'%}" rel="stylesheet" />
+
+    <!-- Page level plugin CSS -->
+    <link href="{% static 'lecture-css/prism.css'%}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'lecture-css/style.css'%}" rel="stylesheet" />
+  </head>
+    <!-- =====================================================
+		                    End Navigations
+		======================================================= -->
+
+    <div class="content-wrapper">
+      <div class="container-fluid" data-spy="scroll" data-target="#spy">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- introduction -->
+            <form action="" method="post">
+              {% csrf_token %}
+              {% for key, value in questions.items %}
+              <div class="card">
+                <div class="card-body ">
+                  <p>{{key}}</p>
+
+              
+                  {% for i in value %}
+                    <input type="radio" id="{{i}}" name="{{key}}" value="{{i}}">
+                    <label for="{{i}}">{{i}}</label><br>
+                  {% endfor %}
+
+
+                </div>
+              </div>
+              {% endfor %}
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded" type="submit" value="submit">submit</button>
+        
+      </form>
+
+
+          </div>
+        </div>
+      </div>
+      <!-- /.content-wrapper-->
+
+      <!-- Footer -->
+
+      <!-- Scroll to Top Button-->
+
+      <!-- Bootstrap core JavaScript-->
+      <script src="{% static 'lecture-css/jquery.min.js.download'%}"></script>
+      <script src="{% static 'lecture-css/bootstrap.bundle.min.js.download'%}"></script>
+
+    </div>
+
+
+{% endblock content %}
+  
+

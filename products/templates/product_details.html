@@ -1,0 +1,177 @@
+{% extends 'base.html' %} {% block content %} {% load tailwind_tags %}
+{%tailwind_css %}
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 text-center">
+          {{data.name}}
+        </h1>
+        {% if lang == "ar" %}<p class="leading-relaxed mb-4 arabic">
+          {{data.ar_description}}
+        </p>
+      {% else %}<p class="leading-relaxed mb-4">
+        {{data.description}}
+      </p>
+      {% endif %}
+        
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">volt : {{data.volt}}</span>
+          <span class="ml-auto text-gray-900"></span>
+          <span class="text-gray-500">Ampere : {{data.ampere}}</span>
+          <span class="ml-auto text-gray-900"></span>
+          <span class="text-gray-500">watt : {{data.watt}}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500"
+            >voice commands : ({{data.voice_command_options}})</span>
+          </div>
+        <div class="flex border-t border-gray-200 py-2">
+          
+          {% if data.is_rf == True %}
+          <span class="text-gray-500">RF</span>
+          <span class="ml-auto text-gray-900"></span>
+          {% endif %}
+            
+          {% if data.is_remote_control == True  %}
+              
+          <span class="text-gray-500"> remote control</span>
+          <span class="ml-auto text-gray-900"></span>
+          {% endif %}
+            
+          {% if data.is_sync_status == True %}
+            
+        <span class="text-gray-500">sync status</span>
+        <span class="ml-auto text-gray-900"></span>
+          {% endif %}
+            
+            {% if  data.is_share_control == True %}
+              
+        <span class="text-gray-500"> share control </span>
+            {% endif %}
+              
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          
+          {% if data.is_smart_scene == True %}
+            
+          <span class="text-gray-500">smart scene</span>
+          <span class="ml-auto text-gray-900"></span>
+          {% endif %}
+            
+            {% if data.is_single_count_down_timing %}
+          <span class="text-gray-500"> single count down timing</span>
+          <span class="ml-auto text-gray-900"></span>
+            {% endif %}
+              
+              {% if data.is_lan_control %}
+                
+          <span class="text-gray-500">lan control</span>
+              {% endif %}
+                
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500"
+            >number of gangs : {{data.number_of_gangs}}</span
+          >
+          <span class="ml-auto text-gray-900"></span>
+          <span class="text-gray-500"
+            >Load per gang : {{data.load_per_gang}}</span
+          >
+          <span class="ml-auto text-gray-900"></span>
+          <span class="text-gray-500">Total load : {{data.total_load}}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Material : {{data.material}}</span>
+          <span class="ml-auto text-gray-900"></span>
+          <span class="text-gray-500"
+            >working temp : {{data.working_temp}}</span
+          >
+          <span class="ml-auto text-gray-900"></span>
+          <span class="text-gray-500">IP : {{data.resistance_code}}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <a href="{{data.video_link}}">installation video</a>
+          <span class="ml-auto text-gray-900"></span>
+          <a href="{{data.programing_video_1}}">programing video 1</a>
+          <span class="ml-auto text-gray-900"></span>
+          <a href="{{data.programing_video_2}}">programing video 2</a>
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <a href="{{data.sell_link}}">sell link</a>
+          <span class="ml-auto text-gray-900"></span>
+          <a href="{{data.digram.url}}">diagram </a>
+          
+          {% if data.digram_2.url != None %}
+          <span class="ml-auto text-gray-900"></span>
+          <a href="{{data.digram_2.url}}">diagram 2 </a>            
+          {% endif %}
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          {% if data.quick_start.url != None %}
+          <a href="{{data.quick_start.url}}">quick_start</a>
+          {% endif %}
+          {% if data.specification.url != None %}
+          <span class="ml-auto text-gray-900"></span>
+          <a href="{{data.specification.url}}">specification</a>
+          {% endif %}
+          {% if data.user_manual.url != None %}
+          <span class="ml-auto text-gray-900"></span>
+          <a href="{{data.user_manual.url}}">user_manual</a>
+          {% endif %}
+            
+          
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          {% if product_tools != None %}
+          {% for tool in product_tools %}
+            {% if tool.icon.url != None %}
+            <img src="{{tool.icon.url}}" alt="" width="30" >
+            {% endif %}
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <img
+        alt="ecommerce"
+        class="
+          lg:w-1/2
+          w-full
+          lg:h-auto
+          h-64
+          object-cover object-center
+          rounded
+        "
+        src="{{data.photo.url}}"
+      />
+    </div>
+  </div>
+  <div class="mx-auto grid grid-cols-4 gap-4">
+    <details class="mb-4">
+      {% if lang == "ar" %}
+      <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
+        طريقه البرمجه
+      </summary>
+      
+      
+      <p class="px-4 py-2 arabic"> {{data.ar_how_to_pair}} </p>
+      {% else %}
+      <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
+        how to pair ?
+      </summary>
+      <h3 class="px-4 py-2"> {{data.how_to_pair}} </h3>
+      {% endif %}
+        
+    </details>
+    {%for question in questions %}
+    <details class="mb-4">
+      <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4">
+        {{question.question}}
+      </summary>
+
+      <span class="px-4 py-2"> {{question.answer}} </span>
+    </details>
+    {%endfor%}
+  </div>
+</section>
+{% endblock content %}

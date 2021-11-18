@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block content %} {% load tailwind_tags %}
+{%tailwind_css %}
+<div class="bg-white ">
+  <div class="min-h-screen bg-gray-100 flex flex-col justify-center">
+    <div class="relative m-3 flex flex-wrap mx-auto justify-center">
+      {%for product in data %}
+      <a href="/{{product.id}}">
+        <div
+          class="
+            relative
+            max-w-sm
+            min-w-[340px]
+            bg-white
+            shadow-2xl
+            rounded-3xl
+            p-2
+            mx-1
+            my-3
+            cursor-pointer
+          "
+        >
+          <div class="">
+            <img
+              class=""
+              src="{{product.photo.url}}"
+            />
+          </div>
+          <div class="mt-4 pl-2 mb-2">
+            <div>
+              <p class="text-lg font-semibold text-gray-900 mb-0 text-center">
+                {{product.name}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
+      {%endfor%}
+    </div>
+  </div>
+</div>
+{% endblock content %}

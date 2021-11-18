@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% load tailwind_tags %} {%tailwind_css %}
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom fonts for this template -->
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/themify.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Angular Tooltip Css -->
+    <link
+      href="{% static 'lecture-css/angular-tooltips.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+
+    <!-- Page level plugin CSS -->
+    <!-- Custom styles for this template -->
+    <link href="{% static 'lecture-css/style.css'%}" rel="stylesheet" />
+  </head>
+    <!-- =====================================================
+		                    End Navigations
+		======================================================= -->
+
+    <div class="content-wrapper">
+      <div class="container-fluid" data-spy="scroll" data-target="#spy">
+        <div class="grid grid-cols-6 gap-4">
+          <div class="col-start-2 col-span-4 ...">
+            <!-- introduction -->
+            <div class="card  ">
+              <div class="card-body ">
+                <h3>name : {{client.full_name}}</h3>
+                <p>classification : {{client.classification}}</p>
+                {% for client_phone in client_phones %}
+                <p>phone number : {{client_phone}}</p>
+                {% endfor %}
+                {% for survey in client_surveys %}
+                <p>{{survey.date}}</p>
+                {% endfor %}
+                <br>
+                {% for apartment in client_apartments %}
+                <a href="/crm/ap/{{apartment.pk}}"><h3>{{apartment.address}}</h3></a>
+                {% endfor %}
+                
+                <br>
+                <form action="" method="post" class = "w-full max-w-lg" >
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="add_apartment">
+                  <input type="hidden" id="apartment_id" name="client_id" value="{{client.pk}}">
+                  <br>
+                  <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        apartment address 
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" type="text" name="address" placeholder="apartment address">
+                      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add apartment</button>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- <form action="" method="post">
+                  {% csrf_token %}
+                  <label>room name: </label>
+                  <input type="text" name="room_name" >
+                  <br>
+                  <label>product name: </label>
+                  <input type="text" name="product_name" >
+                  <br>
+                  <label>before: </label>
+                  <input type="text" name="before" >
+                  <br>
+                  <label>after: </label>
+                  <input type="text" name="after" >
+                  <br>
+                  <input type="submit" value="OK">
+              </form> -->
+              </div>
+            </div>
+        
+
+
+          </div>
+        </div>
+      </div>
+      <!-- /.content-wrapper-->
+
+      <!-- Footer -->
+
+      <!-- Scroll to Top Button-->
+
+      <!-- Bootstrap core JavaScript-->
+      <script src="{% static 'lecture-css/jquery.min.js.download'%}"></script>
+      <script src="{% static 'lecture-css/bootstrap.bundle.min.js.download'%}"></script>
+    </div>
+
+
+{% endblock content %}
+  
+

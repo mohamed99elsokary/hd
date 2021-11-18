@@ -1,0 +1,267 @@
+{% extends 'base.html' %}{% block content %} 
+{% load static %}    {% load tailwind_tags %} {%tailwind_css %}
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      @charset "UTF-8";
+      [ng\:cloak],
+      [ng-cloak],
+      [data-ng-cloak],
+      [x-ng-cloak],
+      .ng-cloak,
+      .x-ng-cloak,
+      .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+      }
+      ng\:form {
+        display: block;
+      }
+      .ng-animate-shim {
+        visibility: hidden;
+      }
+      .ng-anchor {
+        position: absolute;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 200px;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+      }
+      
+      .sidenav a {
+        padding: 6px 6px 6px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: black;
+        display: block;
+      }
+      
+      .sidenav a:hover {
+        color: #818181;
+      }
+      
+    </style>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'lecture-css/bootstrap.min.css'%}" rel="stylesheet" />
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/font-awesome.min.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/themify.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Angular Tooltip Css -->
+    <link
+      href="{% static 'lecture-css/angular-tooltips.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+    <link
+      href="file:///C:/Users/joker/Desktop/full-SkillUp-template/_documentation/assets/plugins/datatables/dataTables.bootstrap4.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+    <!-- Page level plugin CSS -->
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'lecture-css/style.css'%}" rel="stylesheet" />
+    <style>
+      a:link {
+        color: blue ;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:visited {
+        color: blue;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #03b97c ;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      
+      a:active {
+        color: blue;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+    <div class="content-wrapper">
+      <div class="container-fluid" data-spy="scroll" data-target="#spy">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- introduction -->
+            <div class="card">
+              <div class="card-body">
+                <h1 class="uppercase">name : {{apartment.client}}</h1>
+                <h3>address : {{apartment.address}}</h3>
+                
+                {% for key, value in room_products.items %}
+                <br>
+                <button type="button" class="collapsible">{{key}}</button>
+                <div class="content">
+                {% for i in value  %}
+                <br>
+                {{i.product}}    
+                {% if i.before.url != None %}
+                <a href="{{i.before.url}}">, before</a>
+                {% endif %}
+                {% if i.after.url != None %}
+                <a href="{{i.after.url}}" >, after</a>
+                {% endif %}
+                <form action="" method="post" style=" display: inline-block;">
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="delete_product">
+                  <input type="hidden" id="product_id" name="product_id" value="{{i.pk}}">
+                  <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded" type="submit" value="add room">delete</button>
+              </form>
+                <br>
+                {% endfor %}
+              </div>
+                {% endfor %}
+                <br>
+                <br>
+                
+                <div class = "grid grid-cols-3 gap-4">
+                  
+                      
+                    
+                <section class="text-gray-600 body-font relative">
+                  <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-lg">
+                    <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">add Room</h2>
+                <form action="" method="post" class = "w-full max-w-lg" >
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="add_room">
+                  <input type="hidden" id="apartment_id" name="apartment_id" value="{{apartment.pk}}">
+                  <br>
+                  <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        room name 
+                      </label>
+                      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="name" type="text" name="name" placeholder="room name">
+                      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add room</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </section>
+            <section class="text-gray-600 body-font relative">
+              <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-lg">
+                <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">add product to Room</h2>
+                <br>
+                <form action="" method="post" class = "w-full max-w-lg" >
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="add_product">
+                  
+                  <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        Choose a room:
+                      </label>
+
+                      <select class="ahmed appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="rooms" name="room_id">
+                        <option value="" disabled selected>Select Room</option>
+                        {% for room in client_rooms  %}
+                        <option value="{{room.pk}}">{{room.name}}</option>
+                        {% endfor %}
+                      </select>
+
+                      <br>
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        Choose a product:
+                      </label>
+                  <select class="  appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none ahmed" id="products" name="product_id" >
+                    <option value="" disabled selected>Select product</option>
+                    {% for product in products  %}
+                    <option value="{{product.pk}}">{{product.name}}</option>
+                    {% endfor %}
+                  </select>
+                      <br>
+                      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add product</button>
+                    </div>
+                  </div>
+
+                  
+                </form>
+              </div>
+            </section>
+                <section class="text-gray-600 body-font relative">
+                  <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-lg">
+                    <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">add SURVEY</h2>
+
+                <form action="" method="post" class = "w-full max-w-lg" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="add_survey">
+                  <input type="hidden" id="apartment_id" name="apartment_id" value="{{apartment.pk}}">
+                  <br>
+                  <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        add survey 
+                      </label>
+                      <input type="file" name="uploadedFile">
+                      <br>
+                      <br>
+                      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add survey </button>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </section>
+              </div>
+                <br>
+                <div class = "grid grid-cols-6 gap-4">
+                {% for survey in surveys %}
+                <section class="text-gray-600 body-font relative">
+                  <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-lg">
+                <p>survey : <a href="/crm/survey/{{survey.pk}}"  target="_blank">{{survey.date}}</a></p>
+              </div>
+            </section>
+                
+                {% endfor %}
+              </div>
+              </div>
+            </div>
+        
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Bootstrap core JavaScript-->
+      <script src="{% static 'lecture-css/jquery.min.js.download'%}"></script>
+      <script src="{% static 'lecture-css/bootstrap.bundle.min.js.download'%}"></script>
+    </div>
+{% endblock content %}
+  
+

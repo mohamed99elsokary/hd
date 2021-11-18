@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load tailwind_tags %} {%tailwind_css %}
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      @charset "UTF-8";
+      [ng\:cloak],
+      [ng-cloak],
+      [data-ng-cloak],
+      [x-ng-cloak],
+      .ng-cloak,
+      .x-ng-cloak,
+      .ng-hide:not(.ng-hide-animate) {
+        display: none !important;
+      }
+      ng\:form {
+        display: block;
+      }
+      .ng-animate-shim {
+        visibility: hidden;
+      }
+      .ng-anchor {
+        position: absolute;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 200px;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+      }
+      
+      .sidenav a {
+        padding: 6px 6px 6px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: black;
+        display: block;
+      }
+      
+      .sidenav a:hover {
+        color: #818181;
+      }
+      
+    </style>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'lecture-css/bootstrap.min.css'%}" rel="stylesheet" />
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/font-awesome.min.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Custom fonts for this template -->
+    <link
+      href="{% static 'lecture-css/themify.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Angular Tooltip Css -->
+    <link
+      href="{% static 'lecture-css/angular-tooltips.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+    <link
+      href="file:///C:/Users/joker/Desktop/full-SkillUp-template/_documentation/assets/plugins/datatables/dataTables.bootstrap4.css'%}"
+      rel="stylesheet"
+    />
+
+    <!-- Page level plugin CSS -->
+    <link href="{% static 'lecture-css/animate.css'%}" rel="stylesheet" />
+
+    <!-- Page level plugin CSS -->
+    <link href="{% static 'lecture-css/prism.css'%}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'lecture-css/style.css'%}" rel="stylesheet" />
+    <link href="{% static 'lecture-css/responsive.css'%}" rel="stylesheet" />
+    <style>
+      a:link {
+        color: blue ;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:visited {
+        color: blue;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #03b97c ;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      
+      a:active {
+        color: blue;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+    <div class="content-wrapper">
+      <div class="container-fluid" data-spy="scroll" data-target="#spy">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- introduction -->
+            <div class="card">
+              <div class="card-body">
+                <h1 class="uppercase">name : {{survey.apartment.client}}</h1>
+                <h3>address : {{survey.apartment.name}}</h3>
+                <h5>survey : <a href="{{survey.survey.url}}">{{survey.date}}</a> </h5>
+                
+                {% for offer in offers %}
+                <h5>offer : <a href="{{offer.offer.url}}">{{offer.date}}
+                  </a>{% if offer.is_accepted == True %}
+                  accepted
+                  {% else %}
+            not accepted
+                {% endif %}
+                <form action="" method="post" style=" display: inline-block;">
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="delete_offer">
+                  <input type="hidden" id="offer_id" name="offer_id" value="{{offer.pk}}">
+                  <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded" type="submit" value="add room">delete</button>
+              </form>
+              </h5>
+                {% endfor %}
+                
+                {% if order.order != None %}
+                <h5>order : <a href="{{order.order.url}}">{{order.date}}</a> <form action="" method="post" style=" display: inline-block;">
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="delete_order">
+                  <input type="hidden" id="order_id" name="order_id" value="{{order.pk}}">
+                  <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded" type="submit" value="add room">delete</button>
+              </form></h5>
+                {% endif %}
+                  
+                
+                <div class = "grid grid-cols-2 gap-4">
+                <form action="" method="post" class = "w-full max-w-lg" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="add_offer">
+                  <input type="hidden" id="apartment_id" name="apartment_id" value="{{survey.pk}}">
+                  <br>
+                  <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        add offer 
+                      </label>
+                      <input type="file" name="uploadedFile">
+                      <br>
+                      <br>
+                      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add offer </button>
+                    </div>
+                  </div>
+                </form>
+                <form action="" method="post" class = "w-full max-w-lg" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" id="action" name="action" value="add_order">
+                  <input type="hidden" id="apartment_id" name="apartment_id" value="{{survey.pk}}">
+                  <br>
+                  <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        add order 
+                      </label>
+                      <input type="file" name="uploadedFile">
+                      <br>
+                      <br>
+                      <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" value="add room"> add order </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              </div>
+            </div>
+        
+
+
+          </div>
+        </div>
+      </div>
+      <script src="{% static 'lecture-css/jquery.min.js.download'%}"></script>
+      <script src="{% static 'lecture-css/bootstrap.bundle.min.js.download'%}"></script>
+    </div>
+
+
+{% endblock content %}
+  
+

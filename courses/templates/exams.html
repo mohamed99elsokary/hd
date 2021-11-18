@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+  
+  
+      <!-- End Navigation -->
+      <div class="clearfix"></div>
+      <!-- ============================================================== -->
+      <!-- Top header  -->
+      <!-- ============================================================== -->
+
+      <!-- ============================ Page Title Start================================== -->
+      <section class="page-title">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="breadcrumbs-wrap">
+                <h1 class="breadcrumb-title">Exams</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ============================ Page Title End ================================== -->
+
+      <!-- ============================ Course Detail ================================== -->
+      <section class="gray">
+        <div class="container">
+          <div class="row justify-content-center">
+            <!-- Single List -->
+
+            {% for exam in exams %}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+              <div class="crs_grid shadow-2xl">
+                <div class="crs_grid_caption">
+                  <div class="crs_title">
+                    <h1>
+                      <a href="{{exam.id}}" class="crs_title_link"
+                        >{{exam.name}}</a
+                      >
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Pagination -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <ul class="pagination p-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span class="ti-arrow-left"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">18</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span class="ti-arrow-right"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ============================ Course Detail ================================== -->
+
+      <!-- ============================ Call To Action ================================== -->
+      <!-- ============================ Call To Action End ================================== -->
+
+      <!-- ============================ Footer Start ================================== -->
+
+      {% endblock content %}
