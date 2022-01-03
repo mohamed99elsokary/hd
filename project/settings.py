@@ -28,7 +28,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -47,59 +46,35 @@ DEBUG = True
 ALLOWED_HOSTS = ["192.168.4.100", "3.120.200.131", "127.0.0.1"]
 
 
-
 # Application definition
 
 
 INSTALLED_APPS = [
-
     "django.contrib.admin",
-
     "django.contrib.auth",
-
     "django.contrib.contenttypes",
-
     "django.contrib.sessions",
-
     "django.contrib.messages",
-
     "django.contrib.staticfiles",
-
     "tailwind",
-
     "theme",
-
     "crispy_forms",
-
     "products",
-
     "accounts",
-
     "courses",
-
     "clients",
-
     "jazzmin",
-
 ]
 
 
 MIDDLEWARE = [
-
     "django.middleware.security.SecurityMiddleware",
-
     "django.contrib.sessions.middleware.SessionMiddleware",
-
     "django.middleware.common.CommonMiddleware",
-
     "django.middleware.csrf.CsrfViewMiddleware",
-
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-
     "django.contrib.messages.middleware.MessageMiddleware",
-
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-
 ]
 
 
@@ -107,38 +82,23 @@ ROOT_URLCONF = "project.urls"
 
 
 TEMPLATES = [
-
     {
-
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-
         "DIRS": [os.path.join(BASE_DIR, "templates")],
-
         "APP_DIRS": True,
-
         "OPTIONS": {
-
             "context_processors": [
-
                 "django.template.context_processors.debug",
-
                 "django.template.context_processors.request",
-
                 "django.contrib.auth.context_processors.auth",
-
                 "django.contrib.messages.context_processors.messages",
-
             ],
-
         },
-
     },
-
 ]
 
 
 WSGI_APPLICATION = "project.wsgi.application"
-
 
 
 # Database
@@ -147,17 +107,11 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 
 DATABASES = {
-
     "default": {
-
         "ENGINE": "django.db.backends.sqlite3",
-
         "NAME": BASE_DIR / "db.sqlite3",
-
     }
-
 }
-
 
 
 # Password validation
@@ -166,33 +120,19 @@ DATABASES = {
 
 
 AUTH_PASSWORD_VALIDATORS = [
-
     {
-
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-
     },
-
     {
-
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-
     },
-
     {
-
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-
     },
-
     {
-
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-
     },
-
 ]
-
 
 
 # Internationalization
@@ -215,26 +155,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-<<<<<<< HEAD
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-STATIC_URL = "/static/"
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-=======
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     "/var/www/static/",
 ]
->>>>>>> 007c3ba052422f986a790df108c81e4808b14d97
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
@@ -252,4 +182,3 @@ TAILWIND_APP_NAME = "theme"
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-
