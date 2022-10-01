@@ -8,7 +8,7 @@ def dup_event(modeladmin: admin_opt.ModelAdmin, request, queryset):
         from_id = object.id
         object.id = None
         object.save()
-        message = "dup from {} to {}".format(from_id, object.id)
+        message = f"dup from {from_id} to {object.id}"
         modeladmin.log_addition(request=request, object=object, message=message)
 
 

@@ -30,13 +30,15 @@ def all_clients(request):
 
 def client(request, id):
     client = models.Client.objects.get(id=id)
-    if request.method == "POST":
-        if request.POST.get("action") == "add_apartment":
-            models.Apartments.objects.create(
-                client=client,
-                name=request.POST.get("address"),
-                address=request.POST.get("address"),
-            )
+    if (
+        request.method == "POST"
+        and request.POST.get("action") == "add_apartment"
+    ):
+        models.Apartments.objects.create(
+            client=client,
+            name=request.POST.get("address"),
+            address=request.POST.get("address"),
+        )
 
     client_phones = models.Phone_numbers.objects.filter(client=client)
     client_apartments = models.Apartments.objects.filter(client=client)
@@ -61,37 +63,38 @@ def apartment(request, id):
             apartment = models.Apartments.objects.get(
                 id=request.POST.get("apartment_id")
             )
-            if request.POST.get("name") != None:
-                if request.POST.get("name") != "":
-
-                    room = models.Rooms.objects.create(
-                        apartment=apartment, name=request.POST.get("name")
-                    )
-
-        if request.POST.get("action") == "add_survey":
-            if request.FILES.get("uploadedFile") != None:
-                uploadedFile = request.FILES["uploadedFile"]
-                apartment = models.Apartments.objects.get(
-                    id=request.POST.get("apartment_id")
+            if request.POST.get("name") not in [None, ""]:
+                room = models.Rooms.objects.create(
+                    apartment=apartment, name=request.POST.get("name")
                 )
-                room = models.Survey(apartment=apartment, survey=uploadedFile)
-                room.save()
 
-        if request.POST.get("action") == "add_product":
+        if (
+            request.POST.get("action") == "add_survey"
+            and request.FILES.get("uploadedFile") != None
+        ):
+            uploadedFile = request.FILES["uploadedFile"]
+            apartment = models.Apartments.objects.get(
+                id=request.POST.get("apartment_id")
+            )
+            room = models.Survey(apartment=apartment, survey=uploadedFile)
+            room.save()
 
-            if request.POST.get("product_id") != None:
-                if request.POST.get("product_id") != "":
-                    if request.POST.get("room_id") != None:
-                        if request.POST.get("room_id") != "":
-                            product = product_models.Products.objects.get(
-                                id=request.POST.get("product_id")
-                            )
-                            room = models.Rooms.objects.get(
-                                id=request.POST.get("room_id")
-                            )
-                            room = models.products_in_rooms.objects.create(
-                                room=room, product=product
-                            )
+        if (
+            request.POST.get("action") == "add_product"
+            and request.POST.get("product_id") != None
+            and request.POST.get("product_id") != ""
+            and request.POST.get("room_id") != None
+            and request.POST.get("room_id") != ""
+        ):
+            product = product_models.Products.objects.get(
+                id=request.POST.get("product_id")
+            )
+            room = models.Rooms.objects.get(
+                id=request.POST.get("room_id")
+            )
+            room = models.products_in_rooms.objects.create(
+                room=room, product=product
+            )
 
     apartment = models.Apartments.objects.get(id=id)
     surveys = models.Survey.objects.filter(apartment=apartment)
@@ -120,22 +123,25 @@ def survey(request, id):
             models.order.objects.get(id=request.POST.get("order_id")).delete()
         if request.POST.get("action") == "delete_offer":
             models.offer.objects.get(id=request.POST.get("offer_id")).delete()
-        if request.POST.get("action") == "add_order":
-            if request.FILES.get("uploadedFile") != None:
-                uploadedFile = request.FILES["uploadedFile"]
-                order = models.order(survey=survey, order=uploadedFile)
-                order.save()
-        if request.POST.get("action") == "add_offer":
-            if request.FILES.get("uploadedFile") != None:
-                uploadedFile = request.FILES["uploadedFile"]
-                offer = models.offer(survey=survey, offer=uploadedFile)
-                offer.save()
+        if (
+            request.POST.get("action") == "add_order"
+            and request.FILES.get("uploadedFile") != None
+        ):
+            uploadedFile = request.FILES["uploadedFile"]
+            order = models.order(survey=survey, order=uploadedFile)
+            order.save()
+        if (
+            request.POST.get("action") == "add_offer"
+            and request.FILES.get("uploadedFile") != None
+        ):
+            uploadedFile = request.FILES["uploadedFile"]
+            offer = models.offer(survey=survey, offer=uploadedFile)
+            offer.save()
     offers = models.offer.objects.filter(survey=survey)
     try:
         order = models.order.objects.get(survey=survey)
     except:
         order = []
-        pass
     context = {
         "title": "client details",
         "offers": offers,

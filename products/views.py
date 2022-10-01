@@ -16,10 +16,7 @@ def all_products(request, category):
 
 
 def product_details(request, id):
-    if request.GET.get("lang") == "ar":
-        lang = "ar"
-    else:
-        lang = "en"
+    lang = "ar" if request.GET.get("lang") == "ar" else "en"
     product = models.Products.objects.get(id=id)
     questions = models.Questions.objects.filter(products=product)
     product_tools = product.tools.all()

@@ -19,7 +19,7 @@ def exam(request, exam_id):
     if request.method == "POST":
         total = exam_questions.count()
         grade = 0
-        for question in questions.keys():
+        for question in questions:
             answer = request.POST.get(question.question)
             if answer == question.right_answer.answer:
                 grade += 1
